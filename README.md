@@ -57,7 +57,7 @@ Spring Security를 이용한 인증/인가 처리와 JPA를 활용한 데이터�
 - 회원가입 / 로그인 (소셜 로그인 포함)
 - 마이페이지: 이름/비밀번호 수정, 회원 탈퇴
 - 내가 작성한 게시글 목록 확인 및 삭제/수정 가능
-- 
+  
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/4acbb1fc-8f18-44a4-a7d6-834d1e93b43f" />
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/a5820f6b-e1dd-4c52-b4ef-69cfd48d90bf" />
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/d6ae5e00-62dd-4855-8cf9-538de12ae0ed" />
@@ -68,7 +68,7 @@ Spring Security를 이용한 인증/인가 처리와 JPA를 활용한 데이터�
 ### ✅ 교수 상세 보기 + 추천 + 연구실 관심
 - 교수 상세 페이지에서 추천 수, 평균 평가 점수, 연구실 관심 수 확인 가능
 - 교수별 강의평 게시글 리스트 제공
-- - 교수 추천: 1인 1추천, 중복 추천 방지
+  - 교수 추천: 1인 1추천, 중복 추천 방지
   - 이미 추천한 경우 "추천을 취소하시겠습니까?" 확인창
 - 연구실 관심 추가: 중복 여부 확인 및 토글 처리
 - 모두 실시간 Ajax 처리 (화면 리로딩 없이 반영됨)
