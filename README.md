@@ -33,6 +33,11 @@ Spring Security를 이용한 인증/인가 처리와 JPA를 활용한 데이터�
 - 게시글 검색, 교수 선택 강의평 등록
 - 로그인 사용자만 댓글 작성 가능 (Ajax 처리)
 
+## 🔗 구현 기능 / 제약 조건
+
+<img alt="image" src="https://github.com/user-attachments/assets/f0bf9ba3-c52d-42e6-a263-51f7e94c1443" />
+<img alt="image" src="https://github.com/user-attachments/assets/56e22cb7-04f7-4ba3-b629-6af9a59e1e5e" />
+
 
 ## ⚙️ 개발 환경 및 기술 스택
 
