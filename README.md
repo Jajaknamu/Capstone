@@ -3,7 +3,7 @@
 > Spring Boot 기반 강의 평가 및 교수 추천 서비스
 
 > 📬 이메일: heyfer6867@gmail.com  
-> 💼 포트폴리오: [노션 링크](https://unique-income-725.notion.site/13bdee6a325180cfafb8da847116b416?v=fd4325b653464aff8d04999ec724b9c1&pvs=4)  
+> 💼 포트폴리오: https://unique-income-725.notion.site/v2-35886184f1134aaebc02db5441b9508d?source=copy_link 
 ---
 
 ## 💡 프로젝트 소개
