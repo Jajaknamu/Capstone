@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="">
+    <title>평가서 작성</title>
+
+    <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/checkout/">
+
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <!-- 아이콘 -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.svg" />
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+    <!-- ========================= CSS 파일 ========================= -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="/assets/css/animate.css" />
+    <link rel="stylesheet" href="/css/tiny-slider.css" />
+    <link rel="stylesheet" href="/assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="/css/main.css?after" /> <!--?after 붙인 이유: 크롬 캐시 때문에 수정하고나서도 css 적용이 늦게 되서 after 붙이면 바로 적용됨-->
+
+</head>
+
+<body class="bg-light">
+
+<div class="mb-150">
+    <!-- Start Header  -->
+    <th:block th:replace="~{layouts/header :: headerFragment}"></th:block>
+    <!-- End Header Area -->
+</div>
+
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <h2>평가서</h2>
+            <p class="lead">비방,비하,욕설,허위사실 작성 시 처벌 받을 수 있습니다 .</p>
+        </div>
+
+        <div class="container-sm">
+            <div class="container-sm">
+                <form class="w-50 container-sm" th:action="@{/board/create}" method="post" enctype="multipart/form-data">
+                    <div class="row g-3">
+
+                        <div class="col-12">
+                            <label for="boardWriter" class="form-label">Username</label>
+                            <div class="input-group has-validation">
+                                <input type="text" name="boardWriter" class="form-control" id="boardWriter" th:value="${memberDTO.getMemberName()}" readonly> <!-- 작성자 고정 -->
+                                <div class="invalid-feedback">
+                                    Your username is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="boardPassword" class="form-label">Password</label>
+                            <input type="password" name="boardPassword" class="form-control" id="boardPassword" th:value="${memberDTO.getMemberPassword()}" placeholder="비밀번호를 입력해주세요" required="">
+                            <div class="invalid-feedback">
+                                비밀번호를 입력해주세요.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="boardTitle" class="form-label">Title</label>
+                            <input type="text" name="boardTitle" class="form-control" id="boardTitle" placeholder="제목을 입력해주세요" required="">
+                            <div class="invalid-feedback">
+                                제목을 입력해주세요.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="boardContents" class="form-label">Contents</label>
+                            <textarea name="boardContents" cols="30" rows="10" class="form-control" id="boardContents"></textarea>
+                            <div class="invalid-feedback">
+                                내용을 입력해주세요.
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="major" class="form-label">전공 선택</label>
+                            <select class="form-select" name="major" id="major" onchange="loadProfessors()">
+                                <option value="">전공을 선택하시오</option>
+                                <!-- 전공 리스트 -->
+                                <th:block th:each="major : ${allMajors}">
+                                    <option th:value="${major}" th:text="${major}"></option>
+                                </th:block>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="professorSelect" class="form-label">교수님 선택</label>
+                            <select class="form-select" name="professorId" id="professorSelect">
+                                <option value="">교수님을 선택하시오</option>
+                                <!-- 선택된 전공에 맞는 교수님들이 여기에 표시됨 -->
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="col-md-4">
+                            <label for="comfortable_score" class="form-label">출석체크</label>
+                            <select class="form-select" name="ComfortableScore" id="comfortable_score" required="" onchange="calculateTotalScore()">
+                                <option>선택해주세요</option>
+                                <option value="4">A</option>
+                                <option value="3">B</option>
+                                <option value="2">C</option>
+                                <option value="1">D</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="creditScore" class="form-label">성적기준</label>
+                            <select class="form-select" name="creditScore" id="creditScore" required="" onchange="calculateTotalScore()">
+                                <option>선택해주세요</option>
+                                <option value="4">A</option>
+                                <option value="3">B</option>
+                                <option value="2">C</option>
+                                <option value="1">D</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="lectureScore" class="form-label">강의방식</label>
+                            <select class="form-select" name="lectureScore" id="lectureScore" required="" onchange="calculateTotalScore()">
+                                <option>선택해주세요</option>
+                                <option value=4>A</option>
+                                <option value="3">B</option>
+                                <option value="2">C</option>
+                                <option value="1">D</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+                        <!-- 자동 계산된 Total Score 표시 -->
+                        <div class="col-md-4">
+                            <label for="totalScoreLabel" class="form-label">총점</label>
+                            <input type="text" class="form-control" id="totalScoreLabel" name="totalScoreLabel" readonly>
+                            <input type="hidden" id="totalScore" name="totalScore">
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+                    </div>
+                    <div hidden="hidden">
+                        <br>
+                        첨부파일: <input type="file" name="boardFile">
+                    </div>
+                    <hr class="my-4">
+                    <input class="w-100 btn btn-primary btn-lg" type="submit" value="작성 완료">
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+<br>
+<br>
+<!-- Start Footer Area -->
+<th:block th:replace="~{layouts/footer :: footerFragment}"></th:block>
+<!--/ End Footer Area -->
+
+<!-- 부트스트랩 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+
+<!-- ========================= JS here ========================= -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/tiny-slider.js"></script>
+<script src="/js/glightbox.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<!--전공 선택 시, 해당 전공에 속한 교수님 선택하는 스크립트 -->
+<script>
+    function loadProfessors() {
+        const major = document.getElementById('major').value; // 전공 선택
+        const professorSelect = document.getElementById('professorSelect'); // 교수 선택
+        professorSelect.innerHTML = '<option value="">교수님을 선택하세요</option>'; // 기존 옵션 초기화
+
+        if (major !== "") {
+            fetch(`/board/professors?major=${major}`)
+                .then(response => response.json())
+                .then(professors => {
+                    console.log("Fetched professors:", professors);  // 전체 데이터 출력
+
+                    // 교수 데이터가 있는지 확인
+                    if (professors.length === 0) {
+                        professorSelect.innerHTML = '<option>해당 전공에 교수님이 없습니다.</option>';
+                    } else {
+                        professors.forEach(function(professor) {
+                            console.log("Professor Object:", professor); // 개별 교수 데이터 출력
+                            console.log("Professor Name:", professor.professorName); // 교수 이름 확인
+
+                            let option = new Option(professor.professorName, professor.id); // professor.professorName 사용
+                            professorSelect.add(option);
+                        });
+                    }
+                })
+                .catch(error => console.error('Error fetching professors:', error));
+        }
+    }
+</script>
+<script>
+    function calculateTotalScore() {
+        let comfortableScore = parseInt(document.getElementById("comfortable_score").value) || 0;
+        let creditScore = parseInt(document.getElementById("creditScore").value) || 0;
+        let lectureScore = parseInt(document.getElementById("lectureScore").value) || 0;
+
+        let total = comfortableScore + creditScore + lectureScore;
+
+        // 등급 변환
+        let grade = "";
+        if (total >= 10) {
+            grade = "A";
+        } else if (total >= 7) {
+            grade = "B";
+        } else if (total >= 4) {
+            grade = "C";
+        } else {
+            grade = "D";
+        }
+
+        // 총점 필드에 변환된 값 표시
+        document.getElementById("totalScoreLabel").value = grade; // 등급(A, B, C, D) 표시
+        document.getElementById("totalScore").value = total; // 실제 숫자값 저장 (서버 전송용)
+    }
+</script>
+</body>
+</html>

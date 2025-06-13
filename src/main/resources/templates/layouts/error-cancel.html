@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <title>회원탈퇴</title>
+
+    <!-- 아이콘 -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.svg" />
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <!-- ========================= CSS 파일 ========================= -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="/assets/css/animate.css" />
+    <link rel="stylesheet" href="/assets/css/tiny-slider.css" />
+    <link rel="stylesheet" href="/assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+<body>
+<!-- Preloader -->
+<div class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-icon">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- /End Preloader -->
+<!-- Start Error Area -->
+<div class="error-area">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <div class="error-content">
+                    <h1>GoodBye</h1>
+                    <h2>회원 탈퇴를 하시겠습니까?</h2>
+                    <p>버튼 클릭 시 회원탈퇴 완료됩니다.</p>
+                    <div class="button">
+                        <form th:action="@{/member/delete}" method="post">
+                            <input type="hidden" name="id" th:value="${member.id}">
+                            <button type="submit" class="btn">네,탈퇴할게요</button>
+                            <!--<a href="/" class="btn">네,탈퇴할게요</a>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Error Area -->
+
+<!-- 탈퇴 후 메시지 표시 -->
+<p th:if="${message}" th:text="${message}"></p>
+
+<!-- ========================= JS here ========================= -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/tiny-slider.js"></script>
+<script src="/js/glightbox.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script>
+    window.onload = function () {
+        window.setTimeout(fadeout, 500);
+    }
+
+    function fadeout() {
+        document.querySelector('.preloader').style.opacity = '0';
+        document.querySelector('.preloader').style.display = 'none';
+    }
+</script>
+</body>
+</html>

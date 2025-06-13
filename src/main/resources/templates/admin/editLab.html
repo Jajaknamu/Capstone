@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자용 - 연구실 수정</title>
+
+    <!-- CSS 및 폰트 -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: #f5f6fa;
+        }
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            color: white;
+            padding-top: 20px;
+        }
+        .sidebar a {
+            color: white;
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .content {
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<th:block th:replace="~{layouts/header :: headerFragment}"></th:block>
+<br><br><br><br>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- 사이드바 -->
+        <div class="col-md-2 sidebar">
+            <h4 class="text-center">관리자</h4>
+            <hr>
+            <a href="/member/list">회원 관리</a>
+            <a href="/professor/list">교수 관리</a>
+            <a href="/professor/labList" class="fw-bold">연구실 관리</a>
+            <a href="#">공지사항</a>
+        </div>
+
+        <!-- 수정 폼 -->
+        <div class="col-md-10 content">
+            <h2 class="mb-4">연구실 정보 수정</h2>
+            <form th:action="@{'/professor/editLab/' + ${lab.id}}" th:object="${lab}" method="post">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+
+                <div class="mb-3">
+                    <label for="labIntro" class="form-label">연구실 소개</label>
+                    <textarea id="labIntro" th:field="*{labIntro}" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="labKeyword" class="form-label">연구 키워드</label>
+                    <input type="text" id="labKeyword" th:field="*{labKeyword}" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="labSupport" class="form-label">지원 방법</label>
+                    <textarea id="labSupport" th:field="*{labSupport}" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="labRequirements" class="form-label">자격 조건</label>
+                    <textarea id="labRequirements" th:field="*{labRequirements}" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="labTreatment" class="form-label">대우 조건</label>
+                    <textarea id="labTreatment" th:field="*{labTreatment}" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="labLikes" class="form-label">관심 수</label>
+                    <input type="number" id="labLikes" th:field="*{labLikes}" class="form-control" readonly>
+                </div>
+
+                <button type="submit" class="btn btn-primary">수정 완료</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 푸터 -->
+<th:block th:replace="~{layouts/footer :: footerFragment}"></th:block>
+
+<!-- JS -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

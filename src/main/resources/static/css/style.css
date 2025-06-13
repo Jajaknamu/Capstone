@@ -1,0 +1,175 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Alata', sans-serif;
+}
+
+.page-container{
+    width: 100vw;
+    height: 100vh;
+    background: #eff0f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.shadow{
+    -webkit-box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
+    -moz-box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
+    box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
+}
+
+/*join/login 전체적인 컨테이너*/
+.join-login-form-container{
+
+    background:#f5f5f5 ;
+    width:860px;
+    height: 540px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 10px black;
+    border-radius: 10px;
+
+}
+
+/*join부분 CSS 시작*/
+.join-form-left-side{
+    width: 50%;
+    border-radius: 10px 0px 0px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    color: white;
+    background-image:
+  radial-gradient(ellipse farthest-corner at 0 140%, #927be0 0%, #5830E0 70%, #6d48e7 70%);
+}
+/*제목*/
+.join-form-left-side h1{
+    color: white;
+    width:100%;
+    text-align: center;
+    opacity: 0.9;
+}
+/*input 폼 부분*/
+.join-input-container{
+    padding-top: 120px;
+    width: 300px;
+}
+.join-input-container .join-input-wrap{
+    width:300px;
+    height: 45px;
+    margin-top: 20px;
+    border-radius: 2px;
+    border-bottom: solid 2px white;
+
+}
+.join-input-container .join-input-wrap i{
+    color: white;
+    line-height: 45px;
+}
+
+.join-input-container .join-input-wrap input{
+    background: none;
+
+    border: none;
+    line-height: 45px;
+    padding-left:10px;
+    width:267px;
+}
+.join-input-container .join-input-wrap input:focus{
+    outline: none;
+}
+/*버튼 부분*/
+.join-btn-wrap{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;;
+
+}
+.join-btn-wrap .join-btn{
+    width:95px;
+    height:35px;
+    color:#5830E0;
+    border: 0;
+    border-radius: 4px;
+    background: white;
+
+}
+/*join부분 CSS 끝*/
+
+
+
+/*login부분 CSS 시작*/
+.login-form-right-side{
+    width: 50%;
+    border-radius: 0px 10px 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:40px;
+    background: rgb(255,255,255);
+background: linear-gradient(287deg, rgba(255,255,255,1) 0%, rgba(243,244,244,1) 0%, rgba(255,255,255,1) 100%);
+}
+/*제목*/
+.login-form-right-side h1{
+    color: black;
+    width:100%;
+    text-align: center;
+    opacity: 0.9;
+}
+/*input 폼 부분*/
+.login-input-container{
+    padding-top:120px;
+    width:300px;
+}
+.login-input-container .login-input-wrap{
+    width:300px;
+    height: 45px;
+    margin-top: 20px;
+    border-radius: 2px;
+    border-bottom: solid 2px #5830E0;
+
+}
+.login-input-container .login-input-wrap i{
+    color: #5830E0;
+    line-height: 45px;
+}
+
+.login-input-container .login-input-wrap input{
+    background: none;
+
+    border: none;
+    line-height: 45px;
+    padding-left:10px;
+    width:267px;
+}
+.login-input-container .login-input-wrap input:focus{
+    outline: none;
+}
+/*login버튼 부분*/
+.login-btn-wrap{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-btn-wrap .login-btn{
+    width:95px;
+    height:35px;
+    color:white;
+    border: 0;
+    border-radius: 4px;
+    background: #5830E0;
+}
+.login-btn-wrap a{
+    margin-top:10px;
+    text-decoration: none;
+    font-size: 11px;
+    color: gray;
+
+}
+/*login부분 CSS 끝*/

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>평가서 수정</title>
+
+  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/checkout/">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!--  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />-->
+
+  <!-- Bootstrap core CSS -->
+  <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <!-- 폰트 -->
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
+  <link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
+  <meta name="theme-color" content="#7952b3">
+
+  <!-- Custom styles for this template -->
+  <link href="form-validation.css" rel="stylesheet">
+  <!-- ========================= CSS 파일 ========================= -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/assets/css/LineIcons.2.0.css" />
+  <link rel="stylesheet" href="/assets/css/animate.css" />
+  <link rel="stylesheet" href="/css/tiny-slider.css" />
+  <link rel="stylesheet" href="/assets/css/glightbox.min.css" />
+  <link rel="stylesheet" href="/css/main.css?after" /> <!--?after 붙인 이유: 크롬 캐시 때문에 수정하고나서도 css 적용이 늦게 되서 after 붙이면 바로 적용됨-->
+
+</head>
+<body class="bg-light">
+
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2>평가서 수정</h2>
+      <p class="lead">비방,비하,욕설,허위사실 작성 시 처벌 받을 수 있습니다 .</p>
+    </div>
+
+    <div class="container-sm">
+      <div class="container-sm">
+        <form class="w-50 container-sm" th:action="@{/board/update/{id} (id=${boardUpdate.id})}" method="post" name="updateForm" enctype="multipart/form-data">
+          <div class="row g-3">
+
+            <div class="col-12">
+              <label for="boardWriter" class="form-label">Username</label>
+              <div class="input-group has-validation">
+                <input type="hidden" name="id" th:value="${boardUpdate.id}">
+                <input type="text" name="boardWriter" class="form-control" id="boardWriter" th:value="${boardUpdate.boardWriter}" readonly>
+                <div class="invalid-feedback">
+                  Your username is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="boardPassword" class="form-label">Password</label>
+              <input type="password" name="boardPassword" class="form-control" id="boardPassword" placeholder="비밀번호를 입력해주세요">
+              <div class="invalid-feedback">
+                비밀번호를 입력해주세요.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="boardTitle" class="form-label">Title</label>
+              <input type="text" name="boardTitle" class="form-control" id="boardTitle" th:value="${boardUpdate.boardTitle}">
+              <div class="invalid-feedback">
+                제목을 입력해주세요.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="boardContents" class="form-label">Contents</label>
+              <textarea name="boardContents" cols="30" rows="10" class="form-control" id="boardContents" th:text="${boardUpdate.boardContents}"></textarea>
+              <div class="invalid-feedback">
+                내용을 입력해주세요.
+              </div>
+            </div>
+            <input type="hidden" name="boardHits" th:value="${boardUpdate.boardHits}">
+
+            <div class="col-md-4">
+              <label for="major" class="form-label">전공 선택</label>
+              <select class="form-select" name="major" id="major" onchange="loadProfessors()">
+                <option value="">전공을 선택하시오</option>
+                <!-- 전공 리스트 -->
+                <th:block th:each="major : ${allMajors}">
+                  <option th:value="${major}" th:text="${major}"></option>
+                </th:block>
+              </select>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="professorSelect" class="form-label">교수님 선택</label>
+              <select class="form-select" name="professorId" id="professorSelect">
+                <option value="">교수님을 선택하시오</option>
+                <!-- 선택된 전공에 맞는 교수님들이 여기에 표시됨 -->
+              </select>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+
+            <hr>
+            <div class="col-md-4">
+              <label for="comfortable_score" class="form-label">출석체크</label>
+              <select class="form-select" name="ComfortableScore" id="comfortable_score" required="">
+                <option >선택해주세요</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="creditScore" class="form-label">성적기준</label>
+              <select class="form-select" name="creditScore" id="creditScore" required="">
+                <option >선택해주세요</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="lectureScore" class="form-label">강의방식</label>
+              <select class="form-select" name="lectureScore" id="lectureScore" required="">
+                <option >선택해주세요</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="totalScore" class="form-label">총점</label>
+              <select class="form-select" name="totalScore" id="totalScore" required="">
+                <option >선택해주세요</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+          </div>
+          <br>
+          <hr class="my-4">
+
+          <input type="button" class="btn" style="color: white;  background-color: #5830E0" value="글 수정" onclick="boardUpdate()">
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+<br>
+<br>
+<!-- Start Footer Area -->
+<th:block th:replace="~{layouts/footer :: footerFragment}"></th:block>
+<!--/ End Footer Area -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<script src="form-validation.js"></script>
+
+<!-- ========================= JS here ========================= -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/tiny-slider.js"></script>
+<script src="/js/glightbox.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+  //========= Category Slider
+  tns({
+    container: '.category-slider',
+    items: 3,
+    slideBy: 'page',
+    autoplay: false,
+    mouseDrag: true,
+    gutter: 0,
+    nav: false,
+    controls: true,
+    controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      540: {
+        items: 2,
+      },
+      768: {
+        items: 4,
+      },
+      992: {
+        items: 5,
+      },
+      1170: {
+        items: 6,
+      }
+    }
+  });
+</script>
+
+<script th:inline="javascript">
+  const boardUpdate = () => {
+    const pass = [[${boardUpdate.boardPassword}]];
+    const inputPass = document.getElementById("boardPassword").value;
+    if (pass == inputPass) {
+      document.updateForm.submit();
+    } else {
+      alert("비밀번호가 일치하지 않습니다!");
+    }
+  }
+</script>
+
+<!--전공 선택 시, 해당 전공에 속한 교수님 선택하는 스크립트 -->
+<script>
+  function loadProfessors() {
+    const major = document.getElementById('major').value; // 전공 선택
+    const professorSelect = document.getElementById('professorSelect'); // 교수 선택
+    professorSelect.innerHTML = '<option value="">교수님을 선택하세요</option>'; // 기존 옵션 초기화
+
+    if (major !== "") {
+      fetch(`/board/professors?major=${major}`)
+              .then(response => response.json())
+              .then(professors => {
+                console.log("Fetched professors:", professors);  // 전체 데이터 출력
+
+                // 교수 데이터가 있는지 확인
+                if (professors.length === 0) {
+                  professorSelect.innerHTML = '<option>해당 전공에 교수님이 없습니다.</option>';
+                } else {
+                  professors.forEach(function(professor) {
+                    console.log("Professor Object:", professor); // 개별 교수 데이터 출력
+                    console.log("Professor Name:", professor.professorName); // 교수 이름 확인
+
+                    let option = new Option(professor.professorName, professor.id); // professor.professorName 사용
+                    professorSelect.add(option);
+                  });
+                }
+              })
+              .catch(error => console.error('Error fetching professors:', error));
+    }
+  }
+</script>
+</body>

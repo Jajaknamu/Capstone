@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <title>연구실 정보</title>
+
+    <!-- 아이콘 -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.svg" />
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&family=Oswald:wght@500&family=Roboto+Mono:wght@200&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- ========================= CSS 파일 ========================= -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="/assets/css/animate.css" />
+    <link rel="stylesheet" href="/css/tiny-slider.css" />
+    <link rel="stylesheet" href="/assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="/css/Management-style.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/profile-style.css">
+<style>
+    .card {
+        border-radius: 12px;
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    h2, h5 {
+        font-family: 'Jost', sans-serif;
+    }
+
+    p {
+        margin-bottom: 0.5rem;
+        color: #333;
+        line-height: 1.6;
+    }
+
+</style>
+</head>
+<body>
+<!-- Start Header  -->
+<th:block th:replace="~{layouts/header :: headerFragment}"></th:block>
+<!-- End Header Area -->
+
+<!--중간 어쩌구 그냥 이쁘라고 넣은것 start-->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="breadcrumbs-content">
+                    <h1 class="page-title">연구실 & LAB</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <ul class="breadcrumb-nav">
+                    <li>
+                        <a href="/home">Home</a>
+                    </li>
+                    <li>About Us</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end-->
+
+<section class="about-us section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm p-4">
+                    <h2 class="mb-4">연구실 정보</h2>
+
+                    <div class="mb-3">
+                        <h5 class="fw-bold">관심 분야</h5>
+                        <p th:text="${professorLabDTO.labKeyword}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="fw-bold">연구실 소개</h5>
+                        <p th:text="${professorLabDTO.labIntro}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="fw-bold">지원 방법</h5>
+                        <p th:text="${professorLabDTO.labSupport}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="fw-bold">지원 자격(조건)</h5>
+                        <p th:text="${professorLabDTO.labRequirements}"></p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="fw-bold">대우 조건</h5>
+                        <p th:text="${professorLabDTO.labTreatment}"></p>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <form th:action="@{'/professor/lab/recommend/' + ${professorLabDTO.id}}" method="post">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                            <button type="submit" class="btn btn-outline-primary px-4">관심 연구실 추가</button>
+                        </form>
+                    </div>
+
+                    <div class="text-center">
+                        <h5>연구실 관심 수: <span class="text-primary fw-bold" th:text="${professorLabDTO.labLikes}"></span></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Start Footer Area -->
+<th:block th:replace="~{layouts/footer :: footerFragment}"></th:block>
+<!--/ End Footer Area -->
+
+<!-- ========================= JS here ========================= -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/tiny-slider.js"></script>
+<script src="/js/glightbox.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
