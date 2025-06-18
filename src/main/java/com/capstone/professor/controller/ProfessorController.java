@@ -177,7 +177,6 @@ public class ProfessorController {
     public String recommendProfessor(@PathVariable("id") Long id,
                                      @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         //로그인된 회원 정보 가져오기
-//        String loginEmail = (String) session.getAttribute("loginEmail");
         String loginEmail = customUserDetails.getMemberEntity().getMemberEmail();
         if (loginEmail != null) {
             MemberDTO memberDTO = memberService.findByEmail(loginEmail);
