@@ -1,22 +1,31 @@
-# 📖교수님 백과사전[v1, v2]
+# 📖교수님 백과사전[v1, v2] - 교수 평가/추천 시스템(Spring Boot 기반 프로젝트)
 
-> Spring Boot 기반 강의 평가 및 교수 추천 서비스
+**Java / Spring Boot / Spring Data JPA / Thymeleaf / OAuth2 / AJAX 기반 메인 프로젝트**
 
 > 📬 이메일: heyfer6867@gmail.com
 
-> 💼 포트폴리오:  
-  [v1] https://unique-income-725.notion.site/v2-35886184f1134aaebc02db5441b9508d?source=copy_link   
-  [v2] https://unique-income-725.notion.site/v1-141042ddfb21400796d8bfb57cb196e8?source=copy_link
+> 💼 포트폴리오:  [(v1)-자세히보기](https://unique-income-725.notion.site/v2-35886184f1134aaebc02db5441b9508d?source=copy_link) / [(v2)-자세히보기](https://unique-income-725.notion.site/v1-141042ddfb21400796d8bfb57cb196e8?source=copy_link) 
 ---
 
 ## 💡 프로젝트 소개
-[v1] : Spring Boot 기반으로 회원가입, 로그인, 교수 CRUD, 게시판, 마이페이지 등 핵심 기능을 구현  
-[v2] : v1에서 더 다양한 기능 추가 및 인증/인가 처리 추가
-교수 정보, 강의 후기, 추천 및 연구실 정보를 사용자들과 공유하는 사이트입니다.  
-학생들이 직접 교수님에 대한 평가를 남기고, 관심 있는 연구실 정보를 확인하며 지원할 수 있도록 도와줍니다.   
-하였으며, 
-Spring Security를 이용한 인증/인가 처리와 JPA를 활용한 데이터베이스 연동 구조로 설계되었습니다.  
-추천/관심 기능과 마이페이지는 서버 사이드 렌더링(SSR)을 기반으로 하되 일부 동적 기능은 JavaScript와 Ajax를 활용하여 사용자 경험을 개선했습니다.
+> **[v1]** : Spring Boot 기반으로 회원가입, 로그인, 교수 CRUD, 게시판, 마이페이지 등 핵심 기능을 구현  
+> **[v2]** : v1보다 더 다양한 기능 추가 및 인증/인가 처리 추가  
+> Spring Boot 기반의 교수 정보, 강의 후기, 연구실 소개 및 추천 기능을 제공하는 웹 애플리케이션입니다. 교수 정보, 강의 후기, 추천 및 연구실 정보를 사용자들과 공유하는 사이트입니다.
+
+## ⚙️ 개발 환경 및 기술 스택
+
+| Category            | Stack                                                                 |
+|-----------------    |-----------------------------------------------------------------------|
+| **Language**        | Java 17                                                               |
+| **Backend**         | Spring Boot 3.3.3, Spring Security, OAuth2 (Google/Naver)             |
+| **Frontend**        | Thymeleaf, HTML/CSS, JavaScript, AJAX                                 |
+| **Template Engine** | Thymeleaf                                                             |
+| **Database / ORM**  | MySQL, Spring Data JPA                                                |
+| **Build Tool**      | Gradle                                                                |
+| **IDE**             | IntelliJ IDEA                                                         |
+| **Tools**           | Git, GitHub, MySQL Workbench                                          |
+| **Testing**         |JUnit                                                                  |
+
 
 ## 👥 개발 인원 및 기간
 
@@ -44,24 +53,20 @@ Spring Security를 이용한 인증/인가 처리와 JPA를 활용한 데이터�
 <img alt="image" src="https://github.com/user-attachments/assets/56e22cb7-04f7-4ba3-b629-6af9a59e1e5e" />
 
 
-## ⚙️ 개발 환경 및 기술 스택
+## 📌 프로젝트 목표 및 학습 포인트
+- 다양한 JPA 연관관계 매핑
+- N + 1 문제 해결을 위한 쿼리 튜닝
+- 기능확장과 성능 최적화
+- 인증 및 보안 강화
 
-| Category            | Stack                                                                 |
-|-----------------    |-----------------------------------------------------------------------|
-| **Language**        | Java 17                                                               |
-| **Backend**         | Spring Boot 3.3.3, Spring Security, OAuth2 (Google/Naver)             |
-| **Frontend**        | Thymeleaf, HTML/CSS, JavaScript, AJAX                                 |
-| **Template Engine** | Thymeleaf                                                             |
-| **Database / ORM**  | MySQL, Spring Data JPA                                                |
-| **Build Tool**      | Gradle                                                                |
-| **IDE**             | IntelliJ IDEA                                                         |
-| **Tools**           | Git, GitHub, MySQL Workbench                                          |
-| **Testing**         |JUnit                                                                  |
+## 📎 기타 참고
+- MVC 구조를 벗어나 RESTful API 형식으로 구성 필요 -> 백엔드와 프론트엔드 분리 필요요
+- CI/CD, 배포는 포함되지 않음 (추후 EC2 + Docker 목표)
+
+## 🧩 시연 영상
 
 
----
 
-## 🧩 주요 기능 / 시연 이미지
 
 ### ✅ 회원 기능
 - 회원가입 / 로그인 (소셜 로그인 포함)
