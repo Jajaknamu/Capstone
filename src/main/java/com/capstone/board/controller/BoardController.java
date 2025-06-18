@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class BoardController {
     private final CommentService commentService;
     private final MemberService memberService;
     private final ProfessorService professorService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     //새 글 작성 - 글 작성 페이지 호출
@@ -109,7 +111,7 @@ public class BoardController {
         }
 
     }
-    //글 수정 - 수정된 폼의 데이터를 보낸 후 수정된 게시글(/board/detail/{id}.html가 반환되야함
+    //글 수정
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute BoardDTO boardDTO, Model model,
                          @AuthenticationPrincipal CustomUserDetails customUserDetails) {
@@ -117,12 +119,22 @@ public class BoardController {
         MemberEntity loginEmail = customUserDetails.getMemberEntity();
         if (loginEmail != null) {
             MemberDTO memberDTO = memberService.findByEmail(loginEmail.getMemberEmail());
-            boardDTO.setMemberDTO(memberDTO); //memberDTO 설정
 
+            BoardDTO originalBoard = boardService.findById(boardDTO.getId());
+            //사용자 비밀번호 검증
+            if(!originalBoard.getBoardPassword().equals(boardDTO.getBoardPassword())) {
+                model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
+                model.addAttribute("url", "/board/update/" + boardDTO.getId());
+                return "layouts/message";
+            }
+
+            boardDTO.setMemberDTO(memberDTO); //로그인한 사용자 정보 memberDTO 설정
             BoardDTO updatedBoard = boardService.update(boardDTO);
+
             model.addAttribute("board", updatedBoard);
             model.addAttribute("loginEmail", memberDTO);
-            return "/board/detail";
+            model.addAttribute("updateMember", memberDTO);
+            return "redirect:/member/update";
         } else {
             return "member/login";
         }
