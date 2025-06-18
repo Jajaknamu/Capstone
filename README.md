@@ -1,4 +1,4 @@
-# 📖교수님 백과사전[v1, v2] - 교수 평가/추천 시스템(Spring Boot 기반 프로젝트)
+# 📖교수님 백과사전[v1, v2] - 교수 평가/추천 시스템
 
 **Java / Spring Boot / Spring Data JPA / Thymeleaf / OAuth2 / AJAX 기반 메인 프로젝트**
 
