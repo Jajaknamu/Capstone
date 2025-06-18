@@ -171,10 +171,6 @@
           <br>
           <hr class="my-4">
           <input class="w-100 btn btn-primary btn-lg" type="submit" value="글 수정 완료">
-
-<!--
-          <input type="button" class="btn" style="color: white;  background-color: #5830E0" value="글 수정" onclick="boardUpdate()">
--->
         </form>
       </div>
     </div>
@@ -229,18 +225,7 @@
     }
   });
 </script>
-<!--
-<script th:inline="javascript">
-  const boardUpdate = () => {
-    const pass = [[${boardUpdate.boardPassword}]];
-    const inputPass = document.getElementById("boardPassword").value;
-    if (pass == inputPass) {
-      document.updateForm.submit();
-    } else {
-      alert("비밀번호가 일치하지 않습니다!");
-    }
-  }
-</script>-->
+
 <script>
   function calculateTotalScore() {
     let comfortableScore = parseInt(document.getElementById("comfortable_score").value) || 0;
