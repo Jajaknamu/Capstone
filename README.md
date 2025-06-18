@@ -4,7 +4,7 @@
 
 > 📬 이메일: heyfer6867@gmail.com
 
-> 💼 포트폴리오:  [(v1)-자세히보기(Notion)](https://unique-income-725.notion.site/v2-35886184f1134aaebc02db5441b9508d?source=copy_link) / [(v2)-자세히보기(Notion)](https://unique-income-725.notion.site/v1-141042ddfb21400796d8bfb57cb196e8?source=copy_link) 
+> 💼 포트폴리오:  [v1-자세히보기(Notion)](https://unique-income-725.notion.site/v2-35886184f1134aaebc02db5441b9508d?source=copy_link) / [v2-자세히보기(Notion)](https://unique-income-725.notion.site/v1-141042ddfb21400796d8bfb57cb196e8?source=copy_link) 
 ---
 
 ## 💡 프로젝트 소개
